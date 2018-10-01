@@ -3,15 +3,17 @@ import React, { Component } from 'react';
 class Header extends Component {
     constructor(props){
       super(props);
+
+      this.defaultColor = props.defaultColor || '#000';
   
       this.state = {
-        color: '#000'
+        color: this.defaultColor
       }
     }
   
     changeColor() {
       this.setState({
-        color: (this.state.color === '#000') ? '#' + this.props.colors[Math.floor(Math.random()*this.props.colors.length)] : '#000'
+        color: (this.state.color === this.defaultColor) ? '#' + this.props.colors[Math.floor(Math.random()*this.props.colors.length)] : this.defaultColor
       });
     }
   
@@ -23,4 +25,3 @@ class Header extends Component {
   }
 
   export default Header
-  
