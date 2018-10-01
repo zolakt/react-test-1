@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+
 import Header from './Header';
+import ColorsService from './ColorsService';
 
 class App extends Component {
   constructor(props){
@@ -14,21 +16,11 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    await fetch('http://www.colr.org/json/colors/random/2')
-      .then(resp => resp.json())
-      .then(json => {
-        let colors = json.colors.map(y => y.hex);
-
+    await new ColorsService().getRandomColor(2)
+      .then(result => {
         this.setState({
-          colors: colors
-        });
-
-        console.log(colors);
-
-        return colors;
-      })
-      .catch(error => {
-        console.log(error);
+          colors: result
+        })
       });
   }
 
